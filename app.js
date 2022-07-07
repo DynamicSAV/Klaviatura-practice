@@ -1,10 +1,14 @@
 const input = document.querySelector('.textInput');
 const textField = document.querySelector('.text');
+const speed = document.querySelector('.speed');
 let lettersCount = 0;
 let correctCount = 0;
 let correct = true;
 let textMassiv;
 let textLength;
+let symbolCount;
+let time = 0;
+let endOfText = false;
 
 input.addEventListener('keyup', (e) => render(e));
 
@@ -12,6 +16,7 @@ function randomText() {
   fetch('https://api.quotable.io/random')
     .then((res) => res.json())
     .then((result) => {
+      console.log(result.content);
       textMassiv = result.content.split('');
       addText(0);
       textLength = textMassiv.length;
@@ -23,15 +28,13 @@ function checkCorrect(count, e) {
   let textPiece = textMassiv.slice(0, count).join('');
   if (input.value == textPiece) {
     correct = true;
-    if (e.key !== 'Backspace') {
+    if (e.key.length <= 4 && correctCount < input.value.length) {
       correctCount++;
-    } else if (input.value.length < correctCount) {
+    } else if (correctCount > input.value.length) {
       correctCount = input.value.length;
     }
-    console.log('Все верно');
   } else {
     correct = false;
-    console.log('Ошибка');
   }
 }
 
@@ -58,15 +61,53 @@ function checkCount(e) {
   lettersCount = input.value.length;
 }
 
+function reset() {
+  input.value = '';
+  randomText();
+  endOfText = false;
+  time = 0;
+}
+
 function render(e) {
   checkCount(e);
   checkCorrect(lettersCount, e);
   addText(lettersCount);
-  console.log('correctCount = ', correctCount);
+  console.log(
+    'correctCount = ',
+    correctCount,
+    'input.value.length',
+    input.value.length
+  );
   if (input.value.length == textMassiv.length && textLength == correctCount) {
-    alert('Ура ты написал это!Факинг щщщит. Кодовое слово blackAss');
+    endOfText = true;
+    let printSpeed = parseInt(Math.round(textMassiv.length / (time / 60)));
+    if (printSpeed <= 140) {
+      speed.style.color = 'red';
+      console.log('Медленно');
+    }else if (printSpeed < 200) {
+      speed.style.color = 'yellow'
+      console.log('Средне');
+    }else if (printSpeed < 300){
+      speed.style.color = 'green'
+      console.log('Быстро');
+    } else {
+      console.log('Ультра адский принтер');
+    }
+    speed.innerText = `${printSpeed} сим/мин`;
+    
+    reset();
   }
 }
+
+setInterval(() => {
+  if (
+    input.value.length != 0 &&
+    !endOfText
+  ) {
+    time += 1;
+  }
+  console.log(time);
+}, 1000);
 
 // function renderText(array, index) {
 //   let correctPart = array.slice(0,index);

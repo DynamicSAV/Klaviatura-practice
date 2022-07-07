@@ -24,7 +24,7 @@ body {
 .content {
   margin-right: auto;
   margin-left: auto;
-  margin-top: 10px;
+  margin-top: 0px;
   width: 900px;
   min-width: 900px;
 }
@@ -126,4 +126,10 @@ body {
 }
 .uncorrect {
   color: red;
+}
+.speed {
+  font-size: 20px;
+}
+.reset {
+  cursor: pointer;
 }
