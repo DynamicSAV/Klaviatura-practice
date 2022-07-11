@@ -1,6 +1,8 @@
 const input = document.querySelector('.textInput');
 const textField = document.querySelector('.text');
 const speed = document.querySelector('.speed');
+const keyboard = document.querySelector('.keyboard');
+const keys = document.querySelectorAll('.key');
 let lettersCount = 0;
 let correctCount = 0;
 let correct = true;
@@ -16,12 +18,13 @@ function randomText() {
   fetch('https://api.quotable.io/random')
     .then((res) => res.json())
     .then((result) => {
-      console.log(result.content);
       textMassiv = result.content.split('');
       addText(0);
+      nextKeyFocus();
       textLength = textMassiv.length;
     });
 }
+//Первые действия
 randomText();
 
 function checkCorrect(count, e) {
@@ -31,6 +34,7 @@ function checkCorrect(count, e) {
     if (e.key.length <= 4 && correctCount < input.value.length) {
       correctCount++;
     } else if (correctCount > input.value.length) {
+      nextKeyFocus(e);
       correctCount = input.value.length;
     }
   } else {
@@ -62,10 +66,75 @@ function checkCount(e) {
 }
 
 function reset() {
+  correctCount = 0;
   input.value = '';
   randomText();
   endOfText = false;
   time = 0;
+}
+
+function clearFilter() {
+  keys.forEach((elem) => {
+    elem.style.filter = `brightness(${1})`;
+  });
+}
+
+function nextKeyFocus(e) {
+  clearFilter();
+  let allKeys = keyboard.innerText.split('\n');
+  allKeys = allKeys.map((item) => item.toLowerCase());
+  if (correctCount === 0) {
+    console.log('11');
+    keys[
+      allKeys.indexOf(textMassiv[0].toLowerCase())
+    ].style.filter = `brightness(${1.5})`;
+  } else {
+    if (correct == false) {
+      if (correctCount !== input.value.length) {
+        clearFilter();
+        keys[13].style.filter = `brightness(${1.5})`;
+      }
+    } else {
+      let nextKey =
+        keys[allKeys.indexOf(textMassiv[correctCount].toLowerCase())];
+      if (correctCount === textMassiv.length - 1) {
+        keys[50].style.filter = `brightness(${1.5})`;
+      }
+      if (textMassiv[correctCount] == ' ') {
+        keys[54].style.filter = `brightness(${1.5})`;
+      } else if (
+        nextKey !== -1 &&
+        correctCount + 1 !== textLength &&
+        input.value.length !== 0
+      ) {
+        console.log(nextKey);
+        nextKey.style.filter = `brightness(${1.5})`;
+      } else {
+        console.log('пока нет');
+      }
+    }
+  }
+}
+
+function variablesLog() {
+  console.log(
+    'lettersCount = ',
+    lettersCount,
+    'correctCount = ',
+    correctCount,
+    'correct = ',
+    correct,
+    'textMassiv',
+    textMassiv,
+    'textLength = ',
+    textLength,
+    'symbolCount = ',
+    symbolCount,
+    'time = ',
+    time,
+    'endOfText = ',
+    endOfText
+  );
 }
 
 function render(e) {
@@ -83,30 +152,28 @@ function render(e) {
     let printSpeed = parseInt(Math.round(textMassiv.length / (time / 60)));
     if (printSpeed <= 140) {
       speed.style.color = 'red';
-      console.log('Медленно');
-    }else if (printSpeed < 200) {
-      speed.style.color = 'yellow'
-      console.log('Средне');
-    }else if (printSpeed < 300){
-      speed.style.color = 'green'
-      console.log('Быстро');
+      //console.log('Медленно');
+    } else if (printSpeed < 200) {
+      speed.style.color = 'yellow';
+      //console.log('Средне');
+    } else if (printSpeed < 300) {
+      speed.style.color = 'green';
+      //console.log('Быстро');
     } else {
-      console.log('Ультра адский принтер');
+      //console.log('Ультра адский принтер');
     }
     speed.innerText = `${printSpeed} сим/мин`;
-    
+
     reset();
   }
+  nextKeyFocus(e);
+  //variablesLog();
 }
 
 setInterval(() => {
-  if (
-    input.value.length != 0 &&
-    !endOfText
-  ) {
+  if (input.value.length != 0 && !endOfText) {
     time += 1;
   }
-  console.log(time);
 }, 1000);
 
 // function renderText(array, index) {

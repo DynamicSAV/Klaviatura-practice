@@ -60,7 +60,7 @@ body {
 }
 
 .keyboard {
-  height: 260px;
+  height: 325px;
   padding-top: 10px;
 }
 
@@ -72,6 +72,7 @@ body {
   line-height: 45px;
   text-align: center;
   font-size: 15px;
+  font-weight: bold;
   background: linear-gradient(#ece8e8, #b8aaaa);
   float: left;
   border: 1px solid #cacaca;
@@ -129,6 +130,7 @@ body {
 }
 .speed {
   font-size: 20px;
+  font-weight: bolder;
 }
 .reset {
   cursor: pointer;
