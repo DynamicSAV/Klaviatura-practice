@@ -52,7 +52,7 @@ body {
 }
 
 .text {
-  font-size: 20px;
+  font-size: 25px;
   color: aliceblue;
   background-color: rgb(68, 68, 68);
   height: 150px;
@@ -134,4 +134,14 @@ body {
 }
 .reset {
   cursor: pointer;
+}
+
+.hand {
+  z-index: 999;
+  width: 62px;
+  height: 80px;
+  background: url(icons/Hands.png);
+  position: absolute;
+  top: 200;
+  left: 130;
 }

@@ -79,11 +79,11 @@ function clearFilter() {
   });
 }
 
-function nextKeyFocus(e) {
+function nextKeyFocus() {
   clearFilter();
   let allKeys = keyboard.innerText.split('\n');
   allKeys = allKeys.map((item) => item.toLowerCase());
-  if (correctCount === 0) {
+  if (correctCount === 0 && correct) {
     console.log('11');
     keys[
       allKeys.indexOf(textMassiv[0].toLowerCase())
