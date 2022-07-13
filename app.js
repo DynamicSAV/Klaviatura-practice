@@ -3,6 +3,8 @@ const textField = document.querySelector('.text');
 const speed = document.querySelector('.speed');
 const keyboard = document.querySelector('.keyboard');
 const keys = document.querySelectorAll('.key');
+const hand = document.querySelector('.hand');
+let switchMode = document.querySelector('.switchMode');
 let lettersCount = 0;
 let correctCount = 0;
 let correct = true;
@@ -11,6 +13,16 @@ let textLength;
 let symbolCount;
 let time = 0;
 let endOfText = false;
+
+switchMode.onclick = function () {
+  let theme = document.getElementById("theme");
+
+  if (theme.getAttribute("href") == "style-light.css") {
+    theme.href = "style-dark.css"
+  }else {
+    theme.href = "style-light.css"
+  }
+}
 
 input.addEventListener('keyup', (e) => render(e));
 
@@ -21,10 +33,11 @@ function randomText() {
       textMassiv = result.content.split('');
       addText(0);
       nextKeyFocus();
+      let allKeys = keyboard.innerText.split('\n');
+      handImg(keys[allKeys.indexOf(textMassiv[0])], hand);
       textLength = textMassiv.length;
     });
 }
-//Первые действия
 randomText();
 
 function checkCorrect(count, e) {
@@ -79,36 +92,58 @@ function clearFilter() {
   });
 }
 
+function handCoord(elem, target) {
+  let left = elem.getBoundingClientRect().left;
+  let top = elem.getBoundingClientRect().top;
+  target.style.left = `${left + 23}px`;
+  target.style.top = `${top + 30}px`;
+  if (elem === keys[54]) {
+    let left = elem.getBoundingClientRect().left;
+    let top = elem.getBoundingClientRect().top;
+    target.style.left = `${left + 200}px`;
+    target.style.top = `${top}px`;
+  }
+}
+
+function handImg(elem, target) {
+  target.style.backgroundPosition = `${elem.dataset.img}px ${0}`;
+}
+
 function nextKeyFocus() {
   clearFilter();
   let allKeys = keyboard.innerText.split('\n');
   allKeys = allKeys.map((item) => item.toLowerCase());
   if (correctCount === 0 && correct) {
-    console.log('11');
     keys[
       allKeys.indexOf(textMassiv[0].toLowerCase())
     ].style.filter = `brightness(${1.5})`;
+    handCoord(keys[allKeys.indexOf(textMassiv[0].toLowerCase())], hand);
   } else {
     if (correct == false) {
       if (correctCount !== input.value.length) {
         clearFilter();
         keys[13].style.filter = `brightness(${1.5})`;
+        handCoord(keys[13], hand);
       }
     } else {
       let nextKey =
         keys[allKeys.indexOf(textMassiv[correctCount].toLowerCase())];
-      if (correctCount === textMassiv.length - 1) {
-        keys[50].style.filter = `brightness(${1.5})`;
-      }
+      // if (correctCount === textMassiv.length - 1) {
+      //   keys[50].style.filter = `brightness(${1.5})`;
+      //   handCoord(keys[50], hand);
+      // }
       if (textMassiv[correctCount] == ' ') {
         keys[54].style.filter = `brightness(${1.5})`;
+        handCoord(keys[54], hand);
+        handImg(keys[54], hand);
       } else if (
         nextKey !== -1 &&
-        correctCount + 1 !== textLength &&
+        // correctCount + 1 !== textLength &&
         input.value.length !== 0
       ) {
-        console.log(nextKey);
         nextKey.style.filter = `brightness(${1.5})`;
+        handCoord(nextKey, hand);
+        handImg(nextKey, hand);
       } else {
         console.log('пока нет');
       }
@@ -151,15 +186,16 @@ function render(e) {
     endOfText = true;
     let printSpeed = parseInt(Math.round(textMassiv.length / (time / 60)));
     if (printSpeed <= 140) {
-      speed.style.color = 'red';
+      speed.style.color = '#eb7878';
       //console.log('Медленно');
     } else if (printSpeed < 200) {
-      speed.style.color = 'yellow';
+      speed.style.color = '#d1bd05';
       //console.log('Средне');
     } else if (printSpeed < 300) {
-      speed.style.color = 'green';
+      speed.style.color = '#2cd42c';
       //console.log('Быстро');
     } else {
+      speed.style.color = 'purple';
       //console.log('Ультра адский принтер');
     }
     speed.innerText = `${printSpeed} сим/мин`;
@@ -175,41 +211,3 @@ setInterval(() => {
     time += 1;
   }
 }, 1000);
-
-// function renderText(array, index) {
-//   let correctPart = array.slice(0,index);
-//   let uncorrectPart = array.slice(index);
-
-//   textField.innerHTML = '';
-//   array.forEach((element) => {
-//     const p = document.createElement('span');
-//     p.innerText = element;
-//     if (index > 0) {
-//       p.classList.add('blueLetter');
-//     }
-//     textField.append(p);
-//     index--;
-//   });
-// }
-
-// renderText(textMassiv, correctCount);
-
-// function onKeyDown(e) {
-//   if (
-//     e.code == 'Backspace' &&
-//     correctCount > 0 &&
-//     key.value.length <= correctCount
-//   ) {
-//     correctCount--;
-//   }
-//   if (correctCount + 1 == key.value.length) {
-//     textField.style.color = 'white';
-//   } else if (e.key == text[correctCount]) {
-//     textField.style.color = 'white';
-//     correctCount++;
-//   } else if (key.value != '') {
-//     textField.style.color = 'red';
-//   }
-//   renderText(textMassiv, correctCount);
-//   //console.log('correctCount =', correctCount);
-// }

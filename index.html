@@ -5,95 +5,104 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Klaviatura</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="style-light.css" id="theme"/>
   </head>
   <body>
     <div class="content">
       <header>
         <h1 class="listName">Klaviatura</h1>
+        <input type="checkbox" class="switchMode">
         <div class="tool">
-          <img class="reset" onclick="reset()" width="28" height="28" src="https://cdn-icons-png.flaticon.com/512/59/59417.png" alt="reset">
+          <img
+            class="reset"
+            onclick="reset()"
+            width="28"
+            height="28"
+            src="icons/reset.png"
+            alt="reset"
+          />
         </div>
         <div class="speed">...сим/мин</div>
       </header>
       <div class="textInputWin">
-        <input class="textInput" type="text" spellcheck="false" autofocus/>
+        <input class="textInput" type="text" spellcheck="false" autofocus />
       </div>
       <div class="text"></div>
       <div class="hands">
+        <div class="hand"></div>
       </div>
       <div class="keyboard">
         <div class="line">
-          <div class="key">`</div>
-          <div class="key">1</div>
-          <div class="key">2</div>
-          <div class="key">3</div>
-          <div class="key">4</div>
-          <div class="key">5</div>
-          <div class="key">6</div>
-          <div class="key">7</div>
-          <div class="key">8</div>
-          <div class="key">9</div>
-          <div class="key">0</div>
-          <div class="key">-</div>
-          <div class="key">=</div>
-          <div class="key backspace">Backspace</div>
+          <div class="key" data-img="">`</div>
+          <div class="key" data-img="310">1</div>
+          <div class="key" data-img="250">2</div>
+          <div class="key" data-img="187">3</div>
+          <div class="key" data-img="125">4</div>
+          <div class="key" data-img="125">5</div>
+          <div class="key" data-img="-62">6</div>
+          <div class="key" data-img="-62">7</div>
+          <div class="key" data-img="-125">8</div>
+          <div class="key" data-img="-187">9</div>
+          <div class="key" data-img="-250">0</div>
+          <div class="key" data-img="-250">-</div>
+          <div class="key" data-img="-250">=</div>
+          <div class="key backspace" data-img="">Backspace</div>
         </div>
         <div class="line">
-          <div class="key tab">Tab</div>
-          <div class="key">Q</div>
-          <div class="key">W</div>
-          <div class="key">E</div>
-          <div class="key">R</div>
-          <div class="key">T</div>
-          <div class="key">Y</div>
-          <div class="key">U</div>
-          <div class="key">I</div>
-          <div class="key">O</div>
-          <div class="key">P</div>
-          <div class="key">[</div>
-          <div class="key">]</div>
-          <div class="key right">\</div>
+          <div class="key tab" data-img="">Tab</div>
+          <div class="key" data-img="310">Q</div>
+          <div class="key" data-img="250">W</div>
+          <div class="key" data-img="187">E</div>
+          <div class="key" data-img="125">R</div>
+          <div class="key" data-img="125">T</div>
+          <div class="key" data-img="-62">Y</div>
+          <div class="key" data-img="-62">U</div>
+          <div class="key" data-img="-125">I</div>
+          <div class="key" data-img="-187">O</div>
+          <div class="key" data-img="-250">P</div>
+          <div class="key" data-img="-250">[</div>
+          <div class="key" data-img="-250">]</div>
+          <div class="key right" data-img="-250">\</div>
         </div>
         <div class="line">
-          <div class="key caps">Caps Lock</div>
-          <div class="key">A</div>
-          <div class="key">S</div>
-          <div class="key">D</div>
-          <div class="key">
+          <div class="key caps" data-img="">Caps Lock</div>
+          <div class="key" data-img="310">A</div>
+          <div class="key" data-img="250">S</div>
+          <div class="key" data-img="187">D</div>
+          <div class="key" data-img="">
             F
             <div class="pimpa"></div>
           </div>
-          <div class="key">G</div>
-          <div class="key">H</div>
-          <div class="key">
+          <div class="key" data-img="125">G</div>
+          <div class="key" data-img="-62">H</div>
+          <div class="key" data-img="-62">
             J
             <div class="pimpa"></div>
           </div>
-          <div class="key">K</div>
-          <div class="key">L</div>
-          <div class="key">;</div>
-          <div class="key">'</div>
-          <div class="key enter">Enter</div>
+          <div class="key" data-img="-125">K</div>
+          <div class="key" data-img="-187">L</div>
+          <div class="key" data-img="-250">;</div>
+          <div class="key" data-img="-250">'</div>
+          <div class="key enter" data-img="">Enter</div>
         </div>
         <div class="line">
-          <div class="key shift">Shift</div>
-          <div class="key">Z</div>
-          <div class="key">X</div>
-          <div class="key">C</div>
-          <div class="key">V</div>
-          <div class="key">B</div>
-          <div class="key">N</div>
-          <div class="key">M</div>
-          <div class="key">,</div>
-          <div class="key">.</div>
-          <div class="key">/</div>
-          <div class="key shift">Shift</div>
+          <div class="key shift" data-img="">Shift</div>
+          <div class="key" data-img="310">Z</div>
+          <div class="key" data-img="250">X</div>
+          <div class="key" data-img="187">C</div>
+          <div class="key" data-img="125">V</div>
+          <div class="key" data-img="125">B</div>
+          <div class="key" data-img="-62">N</div>
+          <div class="key" data-img="-62">M</div>
+          <div class="key" data-img="-125">,</div>
+          <div class="key" data-img="-187">.</div>
+          <div class="key" data-img="-250">/</div>
+          <div class="key shift" data-img="">Shift</div>
         </div>
         <div class="line">
-          <div class="key leftAlt">Alt</div>
-          <div class="key space">_</div>
-          <div class="key rightAlt">Alt</div>
+          <div class="key leftAlt" data-img="">Alt</div>
+          <div class="key space" data-img="0">_</div>
+          <div class="key rightAlt" data-img="">Alt</div>
         </div>
       </div>
     </div>
