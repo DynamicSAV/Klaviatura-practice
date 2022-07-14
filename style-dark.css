@@ -83,7 +83,7 @@ body {
   background: rgb(43, 43, 43);
   /* background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); */
   /* background: url(https://r4.wallpaperflare.com/wallpaper/513/292/11/gradient-abstract-hd-4k-wallpaper-e846cdf85000ec0870cc012e9822d47a.jpg) no-repeat fixed left bottom; */
-  background: url(https://r4.wallpaperflare.com/wallpaper/533/163/784/digital-digital-art-artwork-illustration-minimalism-hd-wallpaper-d6caac3492787d76e8e36b4298facda4.jpg) no-repeat fixed left bottom;
+  background: url(img/Background-dark.jpg) no-repeat fixed left bottom;
   /* background: url(https://r4.wallpaperflare.com/wallpaper/873/351/661/gradient-simple-background-lights-colorful-wallpaper-f8c6bc5a9fac87d96e10e9620299ebe0.jpg) no-repeat fixed left bottom; */
 
 
@@ -99,7 +99,6 @@ body {
   width: 900px;
   min-width: 900px;
 }
-
 .textInputWin {
   background-color: rgb(33, 231, 83);
   height: 40px;
@@ -117,6 +116,7 @@ body {
   border: none;
   border-top: 2px solid #646464;
   outline: none;
+  letter-spacing: 1px;
   margin: 0;
   padding: 0px 10px;
   background-color: #e0e0e0;
@@ -198,16 +198,20 @@ body {
   width: 133px;
 }
 .leftAlt {
-  margin-left: 200px;
+  margin-left: 198px;
 }
 .space {
-  width: 375px;
+  width: 370px;
 }
 .line {
   clear: left;
 }
 .correctLetters {
   color: rgb(0, 217, 255);
+  letter-spacing: 1px;
+}
+.otherLetters {
+  letter-spacing: 1px;
 }
 .uncorrect {
   color: red;
@@ -223,4 +227,9 @@ body {
   position: absolute;
   top: 427px;
   left: 635px;
+}
+.watermark {
+  line-height: 60px;
+  text-align: center;
+  color: #cecece;
 }

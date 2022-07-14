@@ -95,7 +95,7 @@ function clearFilter() {
 function handCoord(elem, target) {
   let left = elem.getBoundingClientRect().left;
   let top = elem.getBoundingClientRect().top;
-  target.style.left = `${left + 23}px`;
+  target.style.left = `${left + 10}px`;
   target.style.top = `${top + 30}px`;
   if (elem === keys[54]) {
     let left = elem.getBoundingClientRect().left;
