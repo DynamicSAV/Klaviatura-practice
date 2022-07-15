@@ -15,14 +15,14 @@ let time = 0;
 let endOfText = false;
 
 switchMode.onclick = function () {
-  let theme = document.getElementById("theme");
+  let theme = document.getElementById('theme');
 
-  if (theme.getAttribute("href") == "style-light.css") {
-    theme.href = "style-dark.css"
-  }else {
-    theme.href = "style-light.css"
+  if (theme.getAttribute('href') == 'style-light.css') {
+    theme.href = 'style-dark.css';
+  } else {
+    theme.href = 'style-light.css';
   }
-}
+};
 
 input.addEventListener('keyup', (e) => render(e));
 
@@ -74,7 +74,7 @@ function addText(count) {
   textField.append(otherText);
 }
 
-function checkCount(e) {
+function checkCount() {
   lettersCount = input.value.length;
 }
 
@@ -128,19 +128,11 @@ function nextKeyFocus() {
     } else {
       let nextKey =
         keys[allKeys.indexOf(textMassiv[correctCount].toLowerCase())];
-      // if (correctCount === textMassiv.length - 1) {
-      //   keys[50].style.filter = `brightness(${1.5})`;
-      //   handCoord(keys[50], hand);
-      // }
       if (textMassiv[correctCount] == ' ') {
         keys[54].style.filter = `brightness(${1.5})`;
         handCoord(keys[54], hand);
         handImg(keys[54], hand);
-      } else if (
-        nextKey !== -1 &&
-        // correctCount + 1 !== textLength &&
-        input.value.length !== 0
-      ) {
+      } else if (nextKey !== -1 && input.value.length !== 0) {
         nextKey.style.filter = `brightness(${1.5})`;
         handCoord(nextKey, hand);
         handImg(nextKey, hand);
@@ -176,30 +168,19 @@ function render(e) {
   checkCount(e);
   checkCorrect(lettersCount, e);
   addText(lettersCount);
-  console.log(
-    'correctCount = ',
-    correctCount,
-    'input.value.length',
-    input.value.length
-  );
   if (input.value.length == textMassiv.length && textLength == correctCount) {
     endOfText = true;
     let printSpeed = parseInt(Math.round(textMassiv.length / (time / 60)));
     if (printSpeed <= 140) {
       speed.style.color = '#eb7878';
-      //console.log('Медленно');
     } else if (printSpeed < 200) {
       speed.style.color = '#d1bd05';
-      //console.log('Средне');
     } else if (printSpeed < 300) {
       speed.style.color = '#2cd42c';
-      //console.log('Быстро');
     } else {
       speed.style.color = 'purple';
-      //console.log('Ультра адский принтер');
     }
     speed.innerText = `${printSpeed} сим/мин`;
-
     reset();
   }
   nextKeyFocus(e);
